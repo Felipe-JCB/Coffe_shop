@@ -1,24 +1,53 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
-{% block content %}
+{% block content %} 
 
-<h1 class="text-3xl font-bold underline">
-Lista de Productos
-</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {% for producto in productos %}
+  <a href="#" class="group relative block overflow-hidden border rounded-lg shadow-sm">
+    <button
+      class="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+    >
+      <span class="sr-only">Wishlist</span>
+      <!-- icono -->
+    </button>
 
-<ul>
-    {% for producto in productos %}
-        <li>
-            {{ producto.nombre }}
-            <p>
-                - Precio: {{ producto.precio }} USD
-            </p>
-            {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }} " style="max-width: 200px; height: auto;">
-            {% endif %}
-        </li>
-    {% empty %}
-        <li>No hay productos disponibles.</li>
-    {% endfor %}
-</ul>
-{% endblock %}
+    {% if producto.imagen %}
+    <img
+      src="{{ producto.imagen.url }}"
+      alt="{{ producto.nombre }} "
+      class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+    />
+    {% endif %}
+
+    <div class="relative border-t border-gray-100 bg-white p-4">
+      <p class="text-gray-700 font-bold">
+        ${{ producto.precio }}
+      </p>
+
+      <h3 class="mt-1.5 text-lg font-medium text-gray-900">{{ producto.nombre }}</h3>
+
+      <p class="mt-1.5 line-clamp-3 text-gray-700 text-sm">
+        {{ producto.descripcion }}
+      </p>
+
+      <div class="mt-4 flex gap-2">
+        <button
+          class="flex-1 rounded-sm bg-gray-100 px-3 py-2 text-sm font-medium text-gray-900 transition hover:scale-105"
+        >
+          Agregar al carrito
+        </button>
+
+        <button
+          type="button"
+          class="flex-1 rounded-sm bg-gray-900 px-3 py-2 text-sm font-medium text-white transition hover:scale-105"
+        >
+          Comprar ahora
+        </button>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+{% endblock content %}

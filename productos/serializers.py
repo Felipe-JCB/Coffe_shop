@@ -1,0 +1,20 @@
+from rest_framework.serializers import ModelSerializer
+from .models import Producto
+
+
+class ProductoSerializer(ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = [
+        "marca",
+        "nombre",
+        "descripcion",
+        "precio",
+        "disponibilidad",
+        "imagen",   
+        ]
+
+
+
+
+

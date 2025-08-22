@@ -3,6 +3,7 @@ from .models import Producto
 
 
 class ProductoForm(forms.Form):
+    marca = forms.CharField(max_length=100, label="Marca")
     nombre = forms.CharField(max_length=200, label="Nombre")
     descripcion = forms.CharField(max_length=500, label="Descripción")
     precio = forms.DecimalField(max_digits=10, decimal_places=2, label="Precio")
@@ -11,6 +12,7 @@ class ProductoForm(forms.Form):
 
     def guardar(self):
         Producto.objects.create(
+            marca=self.cleaned_data["marca"],
             nombre=self.cleaned_data["nombre"],
             descripcion=self.cleaned_data["descripcion"],
             precio=self.cleaned_data["precio"],
